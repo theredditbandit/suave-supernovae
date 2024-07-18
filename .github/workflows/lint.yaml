@@ -1,11 +1,13 @@
-# GitHub Action workflow enforcing our code style and type checking.
-name: Lint
+# GitHub Action workflow enforcing our code style.
+name: linting and type checking
 
 on:
   push:
     branches:
       - main
   pull_request:
+    branches:
+      - main
 
 concurrency: lint-${{ github.sha }}
 
@@ -33,10 +35,11 @@ jobs:
 
       - name: Install dependencies with uv
         run: |
-          uv pip install -r requirements-dev.txt
+          uv pip install pre-commit
+          uv pip install -r requirements.txt
           uv pip install types-all
 
       - name: Run pre-commit hooks
-        uses: pre-commit/action@v3.0.1
+        run: pre-commit run --all-files
         env:
           SKIP: no-commit-to-branch
