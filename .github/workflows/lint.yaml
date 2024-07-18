@@ -1,27 +1,21 @@
 # GitHub Action workflow enforcing our code style.
+name: linting and type checking
 
-name: Lint
-
-# Trigger the workflow on both push (to the main repository, on the main branch)
-# and pull requests (against the main repository, but from any repo, from any branch).
 on:
   push:
     branches:
       - main
   pull_request:
+    branches:
+      - main
 
-# Brand new concurrency setting! This ensures that not more than one run can be triggered for the same commit.
-# It is useful for pull requests coming from the main repository since both triggers will match.
 concurrency: lint-${{ github.sha }}
 
 jobs:
   lint:
     runs-on: ubuntu-latest
-
     env:
-      # The Python version your project uses. Feel free to change this if required.
       PYTHON_VERSION: "3.12"
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -31,5 +25,21 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
+      - name: Install uv
+        run: pip install uv
+
+      - name: Create and use virtual environment
+        run: |
+          uv venv
+          echo "${{ github.workspace }}/.venv/bin" >> $GITHUB_PATH
+
+      - name: Install dependencies with uv
+        run: |
+          uv pip install pre-commit
+          uv pip install -r requirements.txt
+          uv pip install types-all
+
       - name: Run pre-commit hooks
-        uses: pre-commit/action@v3.0.1
+        run: pre-commit run --all-files
+        env:
+          SKIP: no-commit-to-branch
