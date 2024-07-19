@@ -4,7 +4,7 @@ from pathlib import Path
 from os import getenv
 import typing as t
 
-__all__: tuple = ("ENV",)
+__all__: tuple[str, ...] = ("ENV",)
 
 load_dotenv(Path(__file__).parent.parent.parent / ".env.local")
 
