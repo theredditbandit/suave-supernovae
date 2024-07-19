@@ -17,7 +17,10 @@ class Env:
     ownerId: int
 
 
-def getOptionalKey[T](key: str, converter: type, default: T) -> T:
+T = t.TypeVar("T")
+
+
+def getOptionalKey(key: str, converter: type, default: T) -> T:
     return converter(getenv(key, default))
 
 
