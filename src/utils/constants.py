@@ -1,0 +1,1 @@
+BOTNAME = "codejam-bot"
