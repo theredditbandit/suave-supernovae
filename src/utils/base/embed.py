@@ -5,12 +5,20 @@ import disnake
 
 
 class Emojis(Enum):
+    """
+    A class to store emojis
+    """
+
     CHECK = ":white_check_mark:"
     CROSS = ":x:"
     WARNING = ":warning:"
 
 
 class EmbedColors(Enum):
+    """
+    A class to store embed colors
+    """
+
     SUCCESS = 0x22C55E
     ERROR = 0xF43F5E
     WARNING = 0xF59E0B
@@ -18,6 +26,21 @@ class EmbedColors(Enum):
 
 
 class BaseEmbed(disnake.Embed):
+    """
+    A class to create a base embed
+
+    Parameters
+    ----------
+    usr : disnake.Member | disnake.User
+        The user to set the footer to
+    title : str, optional
+        The title of the embed, by default None
+    description : str, optional
+        The description of the embed, by default None
+    color : int, optional
+        The color of the embed, by default EmbedColors.PRIMARY.value
+    """
+
     def __init__(
         self,
         usr: disnake.Member | disnake.User,
@@ -44,6 +67,25 @@ def createEmbed(
     description: str | None = None,
     type: t.Literal["primary", "success", "error", "warning"] = "primary",
 ):
+    """
+    Create an embed
+
+    Parameters
+    ----------
+    usr : disnake.Member | disnake.User
+        The user to set the footer to
+    title : str, optional
+        The title of the embed, by default None
+    description : str, optional
+        The description of the embed, by default None
+    type : typing.Literal["primary", "success", "error", "warning"], optional
+        The type of the embed, by default "primary"
+
+    Returns
+    -------
+    BaseEmbed
+        The created embed
+    """
     if type == "success":
         color = EmbedColors.SUCCESS.value
     elif type == "error":
@@ -61,6 +103,23 @@ async def sendEmbed(
     first: bool = False,
     **kwargs: t.Any,
 ) -> None:
+    """
+    Send an embed
+
+    Parameters
+    ----------
+    inter : disnake.Interaction
+        The interaction to send the embed in
+    embed : disnake.Embed
+        The embed to send
+    first : bool, optional
+        Whether to send the message as the first response, by default False
+
+    Raises
+    ------
+    disnake.Forbidden
+        If the bot does not have permissions to send the embed
+    """
     try:
         if first:
             await inter.response.send_message(embed=embed, **kwargs)

@@ -8,13 +8,21 @@ from src.utils.constants import BOTNAME
 
 
 class Extension(commands.Cog):
-    __slots__: tuple[str] = ("bot",)
+    """
+    Base class for extensions
+
+    Parameters
+    ----------
+    bot : Bot
+        The bot instance
+    args : typing.Any
+        Positional arguments
+    kwargs : typing.Any
+        Keyword arguments
+    """
 
     def __init__(self, bot: Bot, *args: t.Any, **kwargs: t.Any) -> None:
         self.bot = bot
+        self.logger = Logger(f"{BOTNAME}.extensions.{self.__class__.__name__}")
 
         super().__init__(*args, **kwargs)
-
-    @property
-    def logger(self):
-        return Logger(f"{BOTNAME}.extensions.{self.__class__.__name__}")

@@ -7,6 +7,10 @@ __all__: tuple[str, ...] = ("Logger", "Colors", "LevelColors")
 
 
 class Colors(StrEnum):
+    """
+    ANSI color codes for the logger
+    """
+
     NAMECOLOR = "\033[38;2;147;51;234m"
     PATHCOLOR = "\033[38;2;192;38;211m"
     TIMECOLOR = "\033[38;2;52;211;153m"
@@ -16,6 +20,10 @@ class Colors(StrEnum):
 
 
 class LevelColors(StrEnum):
+    """
+    ANSI color codes for the logger levels
+    """
+
     DEBUG = "\033[38;2;14;165;233m"
     INFO = "\033[38;2;74;222;128m"
     WARNING = "\033[38;2;250;204;21m"
@@ -24,6 +32,17 @@ class LevelColors(StrEnum):
 
 
 class Formatter(logging.Formatter):
+    """
+    Custom formatter for the logger
+
+    Parameters
+    ----------
+    name : str
+        The name of the logger
+    includeFileInFormatter : bool, optional
+        Whether to include the file in the formatter, by default False
+    """
+
     def __init__(self, name: str, includeFileInFormatter: bool = False) -> None:
         super().__init__()
 
@@ -43,6 +62,19 @@ class Formatter(logging.Formatter):
         }
 
     def format(self, record: logging.LogRecord) -> str:
+        """
+        Format the log record
+
+        Parameters
+        ----------
+        record : logging.LogRecord
+            The log record to format
+
+        Returns
+        -------
+        str
+            The formatted log record
+        """
         formatter = self.FORMATS.get(record.levelname)
         if formatter is None:
             formatter = self.FORMATS["INFO"]
@@ -52,6 +84,17 @@ class Formatter(logging.Formatter):
 
 
 class FileHandler(logging.FileHandler):
+    """
+    Custom file handler for the logger
+
+    Parameters
+    ----------
+    ext : str
+        The file extension to use
+    folder : pathlib.Path | str, optional
+        The folder to save the logs in, by default "logs"
+    """
+
     _last_entry: datetime.datetime = datetime.datetime.today()
 
     def __init__(self, *, ext: str, folder: Path | str = "logs") -> None:
@@ -65,6 +108,18 @@ class FileHandler(logging.FileHandler):
         self.setFormatter(Formatter(name=ext))
 
     def emit(self, record: logging.LogRecord) -> None:
+        """
+        Emit the log record
+
+        Parameters
+        ----------
+        record : logging.LogRecord
+            The log record to emit
+
+        Returns
+        -------
+        None
+        """
         if self._last_entry.date() != datetime.datetime.today().date():
             self._last_entry = datetime.datetime.today()
             self.close()
@@ -76,6 +131,21 @@ class FileHandler(logging.FileHandler):
 
 
 class Logger(logging.Logger):
+    """
+    Custom logger class that extends logging.Logger to make it easier to work with
+
+    Parameters
+    ----------
+    name : str
+        The name of the logger
+    level : int | str, optional
+        The logging level, by default 0
+    includeFileInFormatter : bool, optional
+        Whether to include the file in the formatter, by default False
+    fileLogging : bool, optional
+        Whether to log to a file, by default False
+    """
+
     def __init__(
         self,
         name: str,
