@@ -2,11 +2,15 @@
 __pycache__/
 *.py[cod]
 
+.mypy_cache/
+.ruff_cache/
+
 # Environment specific
 .venv
 venv
 .env
 env
+.env*
 
 # Unittest reports
 .coverage*
