@@ -52,7 +52,7 @@ class Formatter(logging.Formatter):
 
 
 class FileHandler(logging.FileHandler):
-    _lastEntry: datetime.datetime = datetime.datetime.today()
+    _last_entry: datetime.datetime = datetime.datetime.today()
 
     def __init__(self, *, ext: str, folder: Path | str = "logs") -> None:
         self.folder = Path(folder)

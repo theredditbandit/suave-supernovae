@@ -2,6 +2,9 @@
 __pycache__/
 *.py[cod]
 
+.my_cache/
+.ruff_cache/
+
 # Environment specific
 .venv
 venv
