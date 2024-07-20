@@ -14,7 +14,7 @@ class EmbedColors(Enum):
     SUCCESS = 0x22C55E
     ERROR = 0xF43F5E
     WARNING = 0xF59E0B
-    PRIMARY = 0x6366f1
+    PRIMARY = 0x6366F1
 
 
 class BaseEmbed(disnake.Embed):
@@ -54,7 +54,13 @@ def createEmbed(
         color = EmbedColors.PRIMARY.value
     return BaseEmbed(usr=usr, title=title, description=description, color=color)
 
-async def sendEmbed(inter: disnake.Interaction ,embed: disnake.Embed, first: bool = False, **kwargs: t.Any) -> None:
+
+async def sendEmbed(
+    inter: disnake.Interaction,
+    embed: disnake.Embed,
+    first: bool = False,
+    **kwargs: t.Any,
+) -> None:
     try:
         if first:
             await inter.response.send_message(embed=embed, **kwargs)
@@ -65,12 +71,12 @@ async def sendEmbed(inter: disnake.Interaction ,embed: disnake.Embed, first: boo
             if first:
                 await inter.response.send_message(
                     "Hey, seems like I can't send embeds. Please check my permissions :)",
-                    **kwargs
+                    **kwargs,
                 )
             else:
                 await inter.channel.send(
                     "Hey, seems like I can't send embeds. Please check my permissions :)",
-                    **kwargs
+                    **kwargs,
                 )
 
         except disnake.Forbidden:
@@ -78,5 +84,5 @@ async def sendEmbed(inter: disnake.Interaction ,embed: disnake.Embed, first: boo
                 f"Hey, seems like I can't send any message in {inter.channel.name if inter.channel.name else "**|**"} on {inter.guild.name if inter.guild else ""}\n"  # type: ignore
                 f"May you inform the server team about this issue? :slight_smile: ",
                 embed=embed,
-                **kwargs
+                **kwargs,
             )
