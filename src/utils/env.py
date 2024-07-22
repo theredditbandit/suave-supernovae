@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+import json
 from dotenv import load_dotenv
 from pathlib import Path
 from os import getenv
@@ -18,18 +19,10 @@ class Env:
     ----------
     token : str
         The bot token
-    testGuild : int | None
-        The test guild id
-    env : typing.Literal["dev", "prod"]
-        The environment the bot is running in
-    ownerId : int
-        The bot owner's id
     """
 
     token: str
-    testGuild: int | None
-    env: t.Literal["dev", "prod"]
-    ownerId: int
+    databaseDSN: str
 
 
 T = t.TypeVar("T")
@@ -94,10 +87,104 @@ def getEnv():
     """
     return Env(
         token=getRequiredKey("TOKEN", str),
-        testGuild=getOptionalKey("TEST_GUILD", int, None),
-        env=getOptionalKey("ENV", str, "dev"),
-        ownerId=getRequiredKey("OWNER_ID", int),
+        databaseDSN=getRequiredKey("DATABASE_DSN", str),
+    )
+
+
+@dataclass
+class Config:
+    """
+    Dataclass to store bot configuration
+
+    Parameters
+    ----------
+    testGuild : int | None
+        The test guild id
+    env : typing.Literal["dev", "prod"]
+        The environment the bot is running in
+    ownerId : int
+        The bot owner's id
+    """
+
+    testGuild: int | None
+    env: t.Literal["dev", "prod"]
+    ownerId: int
+
+
+CONFIG_PATh = Path(__file__).parent.parent / "config.json"
+
+
+def getOptionalConfigKey(
+    config: dict[str, str], key: str, converter: type, default: T
+) -> T:
+    """
+    Get an optional key from the bot configuration
+
+    Parameters
+    ----------
+    config : dict[str, str]
+        The bot configuration
+    key : str
+        The key to get
+    converter : type
+        The type to convert the key to
+    default : T
+        The default value if the key is not found
+
+    Returns
+    -------
+    T
+        The value of the key
+    """
+    return converter(config.get(key)) if key in config else default
+
+
+def getRequiredConfigKey(config: dict[str, str], key: str, converter: type) -> t.Any:
+    """
+    Get a required key from the bot configuration
+
+    Parameters
+    ----------
+    config : dict[str, str]
+        The bot configuration
+    key : str
+        The key to get
+    converter : type
+        The type to convert the key to
+
+    Returns
+    -------
+    typing.Any
+        The value of the key
+
+    Raises
+    ------
+    ValueError
+        If the key is not found
+    """
+    value = config.get(key)
+    if value is None:
+        raise ValueError(f"Missing required key: {key}")
+    return converter(value)
+
+
+def getConfig() -> Config:
+    """
+    Get the bot configuration
+
+    Returns
+    -------
+    Config
+        The bot configuration
+    """
+    with open(CONFIG_PATh) as file:
+        config = json.load(file)
+    return Config(
+        testGuild=getOptionalConfigKey(config, "testGuild", int, None),
+        env=getRequiredConfigKey(config, "env", str),
+        ownerId=getRequiredConfigKey(config, "ownerId", int),
     )
 
 
 ENV = getEnv()
+CONFIG = getConfig()

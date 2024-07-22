@@ -6,7 +6,8 @@ from disnake.ext import commands
 
 from src.utils.constants import BOTNAME
 from src.utils.logger import Logger
-from src.utils.env import ENV
+from src.utils.env import ENV, CONFIG
+from src.utils.db import Database
 
 
 class Bot(commands.InteractionBot):
@@ -15,7 +16,9 @@ class Bot(commands.InteractionBot):
     """
 
     def __init__(self) -> None:
-        self.logger = Logger(f"{BOTNAME}.Bot", fileLogging=ENV.env == "prod")
+        self.logger = Logger(f"{BOTNAME}.Bot", fileLogging=CONFIG.env == "prod")
+        self.db = Database()
+
         intents = disnake.Intents.default()
         intents.typing = True
         intents.message_content = True
@@ -24,7 +27,7 @@ class Bot(commands.InteractionBot):
         intents.presences = True
         intents.moderation = True
 
-        if ENV.env == "dev":
+        if CONFIG.env == "dev":
             self.logger.warn("Bot is running in development mode.")
 
         super().__init__(
@@ -32,12 +35,12 @@ class Bot(commands.InteractionBot):
             allowed_mentions=disnake.AllowedMentions(
                 everyone=False, roles=False, users=True
             ),
-            owner_id=ENV.ownerId,
+            owner_id=CONFIG.ownerId,
             test_guilds=(
-                (ENV.testGuild,) if ENV.env == "dev" and ENV.testGuild else []
+                (CONFIG.testGuild,) if CONFIG.env == "dev" and CONFIG.testGuild else []
             ),
             command_sync_flags=commands.CommandSyncFlags(sync_commands=True),
-            reload=ENV.env == "dev",
+            reload=CONFIG.env == "dev",
         )
 
     async def start(self, *args: t.Any, **kwargs: t.Any) -> None:
@@ -57,7 +60,7 @@ class Bot(commands.InteractionBot):
         """
         self.logger.info("Loading extensions...")
         self.load_extensions(str((Path(__file__).parent / "extensions")))
-
+        await self.db.connect()
         self.logger.info("Starting bot...")
         await super().start(*args, **kwargs)
 
@@ -70,6 +73,7 @@ class Bot(commands.InteractionBot):
         None
         """
         self.logger.info("Closing bot...")
+        await self.db.close()
         return await super().close()
 
     def run(self, *args: t.Any, **kwargs: t.Any) -> None:

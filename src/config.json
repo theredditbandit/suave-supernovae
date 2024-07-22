@@ -1,0 +1,6 @@
+{
+	"$schema": "./utils/base/config.json",
+	"env": "dev",
+	"ownerId": 893363878728192041,
+	"testGuild": 1263439174866960456
+}

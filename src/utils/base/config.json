@@ -1,0 +1,25 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"title": "bot config",
+	"description": "a discord bot config",
+	"properties": {
+		"$schema": {
+			"description": "A field for the [JSON schema](https://json-schema.org/) specification",
+			"type": ["string", "null"]
+		},
+		"env": {
+			"type": "string",
+			"enum": ["dev", "prod"],
+			"description": "The environment the bot is running in"
+		},
+		"testGuild": {
+			"type": ["integer", "null"],
+			"description": "The id of the test guild"
+		},
+		"ownerId": {
+			"type": "integer",
+			"description": "The id of the bot owner"
+		}
+	}
+}
