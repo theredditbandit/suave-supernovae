@@ -32,7 +32,7 @@ class Database:
 
     _dsn = ENV.databaseDSN
     _logger = Logger(f"{BOTNAME}.Database")
-    _pool: asyncpg.Pool
+    _pool: asyncpg.Pool[asyncpg.Record] | None
 
     async def connect(self) -> None:
         """
@@ -53,7 +53,7 @@ class Database:
         self._logger.info("Connecting to the database...")
         retries = 0
         try:
-            self._pool: asyncpg.Pool = await asyncpg.create_pool(dsn=self._dsn)  # type: ignore
+            self._pool = await asyncpg.create_pool(dsn=self._dsn)
             self._logger.info("Connected to the database!")
         except Exception as e:
             if CONFIG.env == "dev":
@@ -76,7 +76,7 @@ class Database:
         If the connection is already closed, it will log a message saying so.
         """
         if self.isConnected:
-            await self._pool.close()
+            await (await self.pool).close()
             self._logger.info("Closed the database connection!")
         else:
             self._logger.info("Connection already closed!")
@@ -94,7 +94,7 @@ class Database:
         return self._pool is not None and not self._pool.is_closing()
 
     @property
-    async def pool(self) -> asyncpg.Pool:
+    async def pool(self) -> asyncpg.Pool[asyncpg.Record]:
         """
         Get a connection to the database.
 
@@ -105,7 +105,7 @@ class Database:
         """
         if not self.isConnected:
             await self.connect()
-        return self._pool
+        return self._pool  # type: ignore
 
 
 def getUpAndDown(file: Path) -> tuple[str, str]:
