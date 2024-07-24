@@ -1,0 +1,12 @@
+-- UP
+
+CREATE TABLE message (
+    id SERIAL PRIMARY KEY,
+    userId INT NOT NULL,
+    content VARCHAR(500) NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- DOWN
+
+DROP TABLE message;
