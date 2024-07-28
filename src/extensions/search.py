@@ -18,36 +18,7 @@ wiki_wiki = wikipediaapi.Wikipedia(language="en", user_agent=user_agent)
 class SearchCog(commands.Cog):
     def __init__(self, bot: "Bot"):
         self.bot = bot
-        self.google_api_key = os.getenv("GOOGLE_API_KEY")
-        self.google_cx = os.getenv("GOOGLE_CX")
-
-    @commands.slash_command(description="Search Google and send the best result.")
-    async def googlesearch(
-        self, inter: disnake.ApplicationCommandInteraction, query: str
-    ):
-        """Search Google and send the best result."""
-        await inter.response.defer(ephemeral=True)  # Acknowledge the interaction early
-
-        if not self.google_api_key or not self.google_cx:
-            await inter.edit_original_message(content="Google API key or CX not set.")
-            return
-
-        search_url = f"https://www.googleapis.com/customsearch/v1?q={query}&key={self.google_api_key}&cx={self.google_cx}"
-        response = requests.get(search_url)
-        data = response.json()
-
-        if "items" in data:
-            result = data["items"][0]
-            title = result["title"]
-            snippet = result["snippet"]
-            link = result["link"]
-            embed = disnake.Embed(
-                title=title, description=snippet, color=0x00FF00, url=link
-            )
-            await inter.edit_original_message(embed=embed)
-        else:
-            await inter.edit_original_message(content="No results found.")
-
+   
     @commands.slash_command(description="Search Wikipedia and send the best result.")
     async def wikisearch(
         self, inter: disnake.ApplicationCommandInteraction, query: str
