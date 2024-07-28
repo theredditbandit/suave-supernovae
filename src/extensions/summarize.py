@@ -29,7 +29,7 @@ class Summarize(Extension):
         summary_prompt = f"""Please summarize the following discord conversation , following the guidelines provided in the system prompt. Here are the messages.
         {context}
         Provide a comprehensive summary that captures the essence of this conversation, highlighting key topics, decisions, and any important context. Your summary should be concise yet informative, allowing someone who hasn't read the original messages to understand the main points and outcomes of the discussion.
-        """
+            """
         completion = self.client.chat.completions.create(
             model="llama-3.1-70b-versatile",
             messages=[
