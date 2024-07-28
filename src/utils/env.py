@@ -23,6 +23,7 @@ class Env:
 
     token: str
     databaseDSN: str
+    groq: str
 
 
 T = t.TypeVar("T")
@@ -88,6 +89,7 @@ def getEnv():
     return Env(
         token=getRequiredKey("TOKEN", str),
         databaseDSN=getRequiredKey("DATABASE_DSN", str),
+        groq=getRequiredKey("GROQ", str),
     )
 
 
