@@ -15,6 +15,7 @@ pool can be obtained from bot.db.pool
 class Message:
     userId: int
     content: str
+    link: str
 
 
 @dataclass
@@ -28,9 +29,10 @@ class MessageModel:
     async def insertOne(pool: asyncpg.Pool, data: Message) -> DBMessage:
         async with pool.acquire() as c:
             d = await c.fetchrow(
-                "INSERT INTO message (userId, content) VALUES ($1, $2) RETURNING *",
+                "INSERT INTO message (userId, content, link) VALUES ($1, $2, $3) RETURNING *",
                 data.userId,
                 data.content,
+                data.link,
             )
             if not d:
                 raise Exception("Failed to add data")
