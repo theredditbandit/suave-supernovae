@@ -1,27 +1,30 @@
 import disnake
 import math
 from src.utils.base.embed import sendEmbed, createEmbed
+from src.utils.models import DBMessage
 
 
 class SavedMessagesView(disnake.ui.View):
-    def __init__(self, inter: disnake.Interaction, user: disnake.User) -> None:
+    def __init__(
+        self, inter: disnake.Interaction, user: disnake.User, data: list[DBMessage]
+    ) -> None:
         self.messages_per_page: int = 4
         self.user: disnake.User = user
-        self.data: list[str] = [f"item {n}" for n in range(10)]
+        self.data: list[DBMessage] = data
         self.index: int = 1
         self.number_of_pages = math.ceil(len(self.data) / self.messages_per_page)
         self.interaction = inter
         super().__init__(timeout=180)
 
     def create_embed(self) -> disnake.Embed:
-        items = self.data[
+        items: list[DBMessage] = self.data[
             (self.index - 1) * self.messages_per_page : self.index
             * self.messages_per_page
         ]
         description: str = ""
 
-        for i, item in enumerate(items):
-            description += f"{i}: {item}\n"
+        for item in items:
+            description += f"Message: ({item.content[:50]}...), Link:[{item.link}]\n"
 
         embed: disnake.Embed = createEmbed(
             self.user, "Saved Messages", description=description
