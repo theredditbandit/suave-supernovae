@@ -7,7 +7,7 @@ from disnake.ext import commands
 from src.utils.constants import BOTNAME
 from src.utils.logger import Logger
 from src.utils.env import ENV, CONFIG
-# from src.utils.db import Database
+from src.utils.db import Database
 
 
 class Bot(commands.InteractionBot):
@@ -17,7 +17,7 @@ class Bot(commands.InteractionBot):
 
     def __init__(self) -> None:
         self.logger = Logger(f"{BOTNAME}.Bot", fileLogging=CONFIG.env == "prod")
-        # self.db = Database()
+        self.db = Database()
 
         intents = disnake.Intents.default()
         intents.typing = True
@@ -60,7 +60,7 @@ class Bot(commands.InteractionBot):
         """
         self.logger.info("Loading extensions...")
         self.load_extensions(str((Path(__file__).parent / "extensions")))
-        # await self.db.connect()
+        await self.db.connect()
         self.logger.info("Starting bot...")
         await super().start(*args, **kwargs)
 
@@ -73,7 +73,7 @@ class Bot(commands.InteractionBot):
         None
         """
         self.logger.info("Closing bot...")
-        # await self.db.close()
+        await self.db.close()
         return await super().close()
 
     def run(self, *args: t.Any, **kwargs: t.Any) -> None:
