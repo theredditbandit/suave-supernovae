@@ -16,17 +16,15 @@ if t.TYPE_CHECKING:
 class Summarize(Extension):
     def __init__(self, bot: "Bot"):
         self.client = groq.Client(api_key=ENV.groq)
-        self.msgHandler = Messages()
         self.logger = Logger("Summarize", fileLogging=CONFIG.env == "prod")
 
     @commands.slash_command(
         name="summarize", description="summarize the content in a thread/channel"
     )
     async def summary(self, inter: disnake.ApplicationCommandInteraction):
+        await inter.response.defer()
         thread_name = inter.channel
-        msg = await self.msgHandler.getMessages(
-            channel=thread_name, limit=100, order="asc"
-        )
+        msg = await Messages.getMessages(channel=thread_name, limit=100, order="asc")
         context = "\n".join([f"{i.author} says {i.content}" for i in msg])
         summary_prompt = f"""Please summarize the following discord conversation , following the guidelines provided in the system prompt. Here are the messages.
         {context}
@@ -44,12 +42,12 @@ class Summarize(Extension):
         )
 
         summary = completion.choices[0].message.content
-        self.logger.info(summary)
 
         embed = createEmbed(
-            inter.user, title=f"{thread_name} summary", description=summary
+            inter.user, title=f"`{thread_name}` summary", description=summary
         )
-        await sendEmbed(inter, embed, first=True)
+
+        await sendEmbed(inter, embed, first=False)
 
 
 def setup(bot: "Bot"):

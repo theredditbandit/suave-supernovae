@@ -13,14 +13,15 @@ pool can be obtained from bot.db.pool
 
 @dataclass
 class Message:
-    userId: int
+    userid: int
     content: str
+    link: str
 
 
 @dataclass
 class DBMessage(Message):
     id: int
-    createdAt: str
+    createdat: str
 
 
 class MessageModel:
@@ -28,12 +29,14 @@ class MessageModel:
     async def insertOne(pool: asyncpg.Pool, data: Message) -> DBMessage:
         async with pool.acquire() as c:
             d = await c.fetchrow(
-                "INSERT INTO message (userId, content) VALUES ($1, $2) RETURNING *",
-                data.userId,
+                "INSERT INTO message (userId, content, link) VALUES ($1, $2, $3) RETURNING *",
+                data.userid,
                 data.content,
+                data.link,
             )
             if not d:
                 raise Exception("Failed to add data")
+            print(d)
             return DBMessage(**d)
 
     @staticmethod
@@ -43,6 +46,14 @@ class MessageModel:
             if not d:
                 raise Exception("Failed to select data")
             return DBMessage(**d)
+
+    @staticmethod
+    async def selectByUserID(pool: asyncpg.Pool, user_id: int) -> list[DBMessage]:
+        async with pool.acquire() as c:
+            d = await c.fetch("SELECT * FROM message WHERE userId = $1", user_id)
+            if not d:
+                raise Exception("Failed to select data")
+            return [DBMessage(**i) for i in d]
 
     @staticmethod
     async def selectAll(pool: asyncpg.Pool) -> list[DBMessage]:
