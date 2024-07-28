@@ -3,7 +3,7 @@ import disnake
 import typing as t
 from disnake.ext import commands
 from src.utils.base.ext import Extension
-from src.utils.base.embed import createEmbed, sendEmbed
+from src.utils.base.embed import createEmbed
 from src.utils.messages import Messages
 from src.utils.prompts import SYSTEM_PROMPT
 from src.utils.env import ENV, CONFIG
@@ -22,7 +22,7 @@ class Summarize(Extension):
         name="summarize", description="summarize the content in a thread/channel"
     )
     async def summary(self, inter: disnake.ApplicationCommandInteraction):
-        await inter.response.defer()
+        await inter.response.defer(ephemeral=True)
         thread_name = inter.channel
         msg = await Messages.getMessages(channel=thread_name, limit=100, order="asc")
         context = "\n".join([f"{i.author} says {i.content}" for i in msg])
@@ -47,7 +47,8 @@ class Summarize(Extension):
             inter.user, title=f"`{thread_name}` summary", description=summary
         )
 
-        await sendEmbed(inter, embed, first=False)
+        # await sendEmbed(inter, embed, first=False)
+        await inter.followup.send(embed=embed)
 
 
 def setup(bot: "Bot"):
