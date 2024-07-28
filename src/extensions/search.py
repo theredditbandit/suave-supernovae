@@ -1,8 +1,6 @@
 import disnake
 from disnake.ext import commands
-import requests
 import wikipediaapi
-import os
 import typing as t
 
 if t.TYPE_CHECKING:
@@ -18,7 +16,7 @@ wiki_wiki = wikipediaapi.Wikipedia(language="en", user_agent=user_agent)
 class SearchCog(commands.Cog):
     def __init__(self, bot: "Bot"):
         self.bot = bot
-   
+
     @commands.slash_command(description="Search Wikipedia and send the best result.")
     async def wikisearch(
         self, inter: disnake.ApplicationCommandInteraction, query: str
