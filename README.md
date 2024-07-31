@@ -1,5 +1,7 @@
 # Suave supernovae
 
+<img src="/Team Banner.png">
+
 >In the fast-paced world of Discord, managing and making sense of extensive text conversations can be challenging.
 >As the volume of messages grows, it becomes increasingly difficult to stay informed and engaged in discussions.
 >Our solution addresses this problem with a bot designed to streamline and simplify text management on Discord.
