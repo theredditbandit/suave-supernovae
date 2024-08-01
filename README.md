@@ -63,7 +63,10 @@ Before you can use the discord bot, there are some setup steps you need to follo
 
 With the application up and running, you can now explore the discord bot's capabilities:
 
-1.
+1. To save messages simply select your message of choice and when the context menu pops up you should see a section named apps. Inside of that section you should see the ability to save a message.
+<img src="./screenshots/savemessage.gif" alt="Saving messages with the discord application." width="33%"></img>
+
+2. To view your saved messages
 
 ## Installation
 
@@ -78,7 +81,11 @@ To develop this project on your local machine, follow the steps outlined below.
 
 > **Note**: Ensure you have Python version 3.11 installed. If not, download it from [here](https://www.python.org/downloads/).
 
-1.
+1. To install the project locally you first need to run the following line to install all of its requirements
+
+```
+pip install -r requirements.txt
+```
 
 ### Dev Container Installation
 
