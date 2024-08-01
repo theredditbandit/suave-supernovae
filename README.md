@@ -41,12 +41,11 @@ In addition, each subfolder has another README detailing the architecture and de
 
 Our project has the following key features:
 
-- Developed using **Disnake**, a Python library for building Discord bots.
-- **AI-powered summarizer** that delivers a **concise summary** of conversations in any text channel, allowing users to quickly grasp ongoing discussions.
-- **Ask the bot** feature lets users query the bot about any topic, even if it hasn’t been mentioned in the current conversation, avoiding the need to search through past messages or leave Discord.
-- Gives users the ability to **fetch Wikipedia articles** on specific topics directly within the Discord channel, providing instant access to relevant information.
+- `/summarize` :**AI-powered summarizer** that delivers a **concise summary** of conversations in any text channel, allowing users to quickly grasp ongoing discussions.
+- `/ask` :**Ask the bot** feature lets users query the bot about any topic, even if it hasn’t been mentioned in the current conversation, avoiding the need to search through past messages or leave Discord.
+- `/search` :Gives users the ability to **fetch Wikipedia articles** on specific topics directly within the Discord channel, providing instant access to relevant information.
 - **Message saver** functionality enables users to **save and retrieve important messages** swiftly, ensuring easy access to critical information.
-- **Help command** offers descriptions of all available commands, helping users understand and utilize the bot’s features effectively.
+- `/help` :**Help command** offers descriptions of all available commands, helping users understand and utilize the bot’s features effectively.
 
 ## User Guide
 
