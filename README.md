@@ -159,7 +159,7 @@ You can also use [neon](https://neon.tech/) to get your dsn.
 
 5. Your .env file should now look something like this.
 
-<img src="./screenshots/env.png" alt="example .env file"></img>
+<img src="./screenshots/env.png" alt="example .env file" width = "50%"></img>
 
 5. After having added the tokens and the database dsn to your .env file you can now run the bot on the server you've added it to.
 
