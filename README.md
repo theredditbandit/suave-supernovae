@@ -155,6 +155,9 @@ after these steps make sure to run the following command:
 python -m src.utils.db apply-all
 ```
 
+## How to run the project
+
+
 >**Note: You may run migrations manually.**
 
 1. For running this project you will need a discord bot token by getting it from the [discord developer portal](https://discord.com/developers/applications ). Follow the instructions on there to also add the bot to the server of your choosing.
@@ -162,6 +165,8 @@ python -m src.utils.db apply-all
 2. You will also need a groq token which you can get from [here](https://console.groq.com/keys).
 
 3. If you have installed the project locally you will also need to add a database dsn which can be done by running a postgres database and getting its connection string.
+
+You can also use [neon](https://neon.tech/) to get your dsn.
 
 Execute this in your postgressql terminal to create the migrations table:
 
@@ -171,7 +176,6 @@ CREATE TABLE IF NOT EXISTS migrations (
 );
 ```
 
-You can also use [neon](https://neon.tech/) to get your dsn.
 
 4. You will now need to go the env.py file located in 'src/utils/env.py and rename '.env.local' to '.env'
 
