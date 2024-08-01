@@ -154,6 +154,7 @@ after these steps make sure to run the following command:
 ```
 python -m src.utils.db apply-all
 ```
+## How to run the project
 
 >**Note: You may run migrations manually.**
 
