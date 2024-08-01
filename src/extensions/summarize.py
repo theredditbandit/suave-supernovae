@@ -3,9 +3,9 @@ import disnake
 import typing as t
 from disnake.ext import commands
 from src.utils.base.ext import Extension
-from src.utils.base.embed import createEmbed, sendEmbed
+from src.utils.base.embed import createEmbed
 from src.utils.messages import Messages
-from src.utils.prompts import SYSTEM_PROMPT
+from src.utils.prompts import SUMMARIZE_SYSTEM_PROMPT
 from src.utils.env import ENV, CONFIG
 from src.utils.logger import Logger
 
@@ -22,9 +22,9 @@ class Summarize(Extension):
         name="summarize", description="summarize the content in a thread/channel"
     )
     async def summary(self, inter: disnake.ApplicationCommandInteraction):
-        await inter.response.defer()
+        await inter.response.defer(ephemeral=True)
         thread_name = inter.channel
-        msg = await Messages.getMessages(channel=thread_name, limit=100, order="asc")
+        msg = await Messages.getMessages(channel=thread_name, limit=1000, order="asc")
         context = "\n".join([f"{i.author} says {i.content}" for i in msg])
         summary_prompt = f"""Please summarize the following discord conversation , following the guidelines provided in the system prompt. Here are the messages.
         {context}
@@ -33,7 +33,7 @@ class Summarize(Extension):
         completion = self.client.chat.completions.create(
             model="llama-3.1-70b-versatile",
             messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "system", "content": SUMMARIZE_SYSTEM_PROMPT},
                 {"role": "user", "content": summary_prompt},
             ],
             temperature=1,
@@ -47,7 +47,8 @@ class Summarize(Extension):
             inter.user, title=f"`{thread_name}` summary", description=summary
         )
 
-        await sendEmbed(inter, embed, first=False)
+        # await sendEmbed(inter, embed, first=False)
+        await inter.followup.send(embed=embed)
 
 
 def setup(bot: "Bot"):
