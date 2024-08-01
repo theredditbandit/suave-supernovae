@@ -64,24 +64,24 @@ With the application up and running, you can now explore the discord bot's capab
 
 1. To save messages simply select your message of choice and when the context menu pops up you should see a section named apps. Inside of that section you should see the ability to save a message.
 
-<img src="./screenshots/savemessage.gif" alt="Saving messages with the discord application."></img>
+<img src="./screenshots/savemessage.gif" alt="Saving messages with the discord application." width = "50%"></img>
 
 2. To view your saved messages, click on the bot's icon, go to apps and select see saved messages.
 
- <img src="./screenshots/seesaves.png" alt="Seeing Saved messages with the discord application."></img>
+ <img src="./screenshots/seesaves.png" alt="Seeing Saved messages with the discord application." width = "50%"></img>
 
 3. If you want to use the summarizer command, run '/summarizer' in the thread or channel you want summarized.
 
-<img src="./screenshots/summarizer.gif" alt="Summarizing messages in a thread or channel."></img>
+<img src="./screenshots/summarizer.gif" alt="Summarizing messages in a thread or channel." width = "50%"></img>
 
 4. To use the ask command so that you can ask a question based on the chat or outside of chat, run '/ask'.
 
-<img src="./screenshots/asknocontext.png" alt="Running the ask command in a thread or channel."></img>
-<img src="./screenshots/askcontext.png>" alt="Running the ask command in a thread or channel."></img>
+<img src="./screenshots/asknocontext.png" alt="Running the ask command in a thread or channel." width = "50%"></img>
+<img src="./screenshots/askcontext.png>" alt="Running the ask command in a thread or channel." width = "50%"></img>
 
 5. For bringing up wikipedia articles in the chat, run '/wikisearch'.
 
-<img src="./screenshots/wikisearch.png>" alt="Bringing up wikipedia articles."></img>
+<img src="./screenshots/wikisearch.png>" alt="Bringing up wikipedia articles." width = "50%"></img>
 
 6. If you ever forget the usage of a commmand, run '/help' to get a description of all of the commands.
 
