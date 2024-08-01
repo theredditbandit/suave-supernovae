@@ -88,7 +88,7 @@ To develop this project on your local machine, follow the steps outlined below.
 
 > **Note**: Ensure you have Python version 3.11 installed. If not, download it from [here](https://www.python.org/downloads/).
 
-1. To install the project locally you first need to run the following line to install all of its requirements
+To install the project locally you first need to run the following line to install all of its requirements
 
 ```
 pip install -r requirements.txt
@@ -127,8 +127,6 @@ To connect PyCharm to the Development Container, please [follow these instructio
 
 #### GitHub Codespaces
 
-> **Note**: GitHub Codespaces is a paid service. At the time of writing, it offers 60 hours of development time for free every month. Use with care.
-
 1. Ensure that you have access to [GitHub Codespaces](https://github.com/features/codespaces).
 
 2. Navigate to the GitHub repository for the project.
@@ -145,11 +143,27 @@ To connect PyCharm to the Development Container, please [follow these instructio
 
 
 ## How to Run the Project
-To run the project locally you'll need to get some tokens and api keys and add them to the .env.local file.
+1. For running this project you will need a discord bot token by getting it from the [discord developer portal](https://discord.com/developers/applications ). Follow the instructions on there to also add the bot to the server of your choosing.
 
+2. You will also need a groq token which you can get from [here](https://console.groq.com/keys).
 
+3. If you have installed the project locally you will also need to add a database dsn which can be done by running a postgres database and getting its connection string.
 
+You can also use [neon](https://neon.tech/) to get your dsn.
 
+4. You will now need to go the env.py file located in 'src/utils/env.py and rename '.env.local' to '.env'
+
+5. Your .env file should now look something like this.
+<img src="./screenshots/env.png" alt="example .env file"></img>
+
+5. After having added the tokens and the database dsn to your .env file you can now run the bot on the server you've added it to.
+
+If you installed the project locally you can run the project by running the following line in the root of the project.
+```
+python -m src
+```
+
+or alternatively you can run the bot using the container that was provided.
 
 ## Contributors
 
@@ -157,8 +171,8 @@ This project was built by `Suave Supernovae` team as part of the Python Discord 
 
 | Avatar                                                     | Name                                        | Main contributions            |
 | ---------------------------------------------------------- | ------------------------------------------- | ----------------------------- |
-| <img src="https://github.com/Aekardy.png" width="50">   | [Aekardy](https://github.com/Aekardy) |  ask command, team lead   |
+| <img src="https://github.com/Aekardy.png" width="50">   | [Aekardy](https://github.com/Aekardy) |  ask command   |
 | <img src="https://github.com/kian3158.png" width="50">     | [Adrian Carton De Wiart](https://github.com/kian3158)  | search command, help command |
-| <img src="https://github.com/theredditbandit.png" width="50"> | [TheLastMethBender](https://github.com/theredditbandit)     | summarizer, repository setup   |
-| <img src="https://github.com/NaviTheCoderBoi.png" width="50">     | [NaviTheCoderBoi](https://github.com/NaviTheCoderboi)      | summarizer, base project setup         |
-| <img src="https://github.com/Shubham-Mate.png" width="50">  | [Butter Dog](https://github.com/Shubham-Mate)   | message saver,   |
+| <img src="https://github.com/theredditbandit.png" width="50"> | [TheLastMethBender](https://github.com/theredditbandit)     | summarizer and ask command, groq integration  |
+| <img src="https://github.com/NaviTheCoderBoi.png" width="50">     | [NaviTheCoderBoi](https://github.com/NaviTheCoderboi)      | bot starter code, database setup       |
+| <img src="https://github.com/Shubham-Mate.png" width="50">  | [Butter Dog](https://github.com/Shubham-Mate)   | message saver, database setup   |
