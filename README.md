@@ -97,6 +97,7 @@ To install the project locally you first need to run the following line to insta
 ```
 pip install -r requirements.txt
 ```
+
 after that make sure to run the following command:
 ```
 python -m src.utils.db apply-all
@@ -105,7 +106,6 @@ python -m src.utils.db apply-all
 ### Dev Container Installation
 
 > **Note**: Due to last minute implementations you will have to rename .env.local to .env in the src/utils/env.py file if you wish to use this approach
-
 
 This project includes a [development container](https://containers.dev/) to simplify the setup process and provide a consistent development environment.
 
@@ -149,14 +149,12 @@ To connect PyCharm to the Development Container, please [follow these instructio
 
 7. You're all set! You can now run, develop, build, and test the project using the provided development environment.
 
-
 after these steps make sure to run the following command:
+
 ```
 python -m src.utils.db apply-all
 ```
 
-
-## How to Run the Project
 >**Note: You may run migrations manually.**
 
 1. For running this project you will need a discord bot token by getting it from the [discord developer portal](https://discord.com/developers/applications ). Follow the instructions on there to also add the bot to the server of your choosing.
