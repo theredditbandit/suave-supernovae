@@ -62,7 +62,7 @@ With the application up and running, you can now explore the discord bot's capab
 
 3. If you want to use the summarizer command, run '/summarizer' in the thread or channel you want summarized.
 
-<img src="./screenshots/summarizer.gif" alt="Summarizing messages in a thread or channel." width = "50%"></img>
+<img src="./screenshots/summarizer.png" alt="Summarizing messages in a thread or channel." width = "50%"></img>
 
 4. To use the ask command so that you can ask a question based on the chat or outside of chat, run '/ask'.
 
@@ -71,9 +71,13 @@ With the application up and running, you can now explore the discord bot's capab
 
 5. For bringing up wikipedia articles in the chat, run '/wikisearch'.
 
-<img src="./screenshots/wikisearch.png>" alt="Bringing up wikipedia articles." width = "50%"></img>
+<img src="./screenshots/wikisearch.png" alt="Bringing up wikipedia articles." width = "50%"></img>
 
 6. If you ever forget the usage of a commmand, run '/help' to get a description of all of the commands.
+
+<img src="./screenshots/help.PNG" alt="Help command showcase" ></img>
+
+
 
 ## Installation
 
@@ -154,6 +158,7 @@ You can also use [neon](https://neon.tech/) to get your dsn.
 4. You will now need to go the env.py file located in 'src/utils/env.py and rename '.env.local' to '.env'
 
 5. Your .env file should now look something like this.
+
 <img src="./screenshots/env.png" alt="example .env file"></img>
 
 5. After having added the tokens and the database dsn to your .env file you can now run the bot on the server you've added it to.
