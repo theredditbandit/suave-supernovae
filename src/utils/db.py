@@ -32,7 +32,7 @@ class Database:
 
     _dsn = ENV.databaseDSN
     _logger = Logger(f"{BOTNAME}.Database")
-    _pool: asyncpg.Pool[asyncpg.Record] | None
+    _pool: asyncpg.Pool[asyncpg.Record] | None = None
 
     async def connect(self) -> None:
         """
