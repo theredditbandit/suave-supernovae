@@ -63,9 +63,22 @@ Before you can use the discord bot, there are some setup steps you need to follo
 With the application up and running, you can now explore the discord bot's capabilities:
 
 1. To save messages simply select your message of choice and when the context menu pops up you should see a section named apps. Inside of that section you should see the ability to save a message.
-<img src="./screenshots/savemessage.gif" alt="Saving messages with the discord application." width="33%"></img>
+<img src="./screenshots/savemessage.gif" alt="Saving messages with the discord application."></img>
 
-2. To view your saved messages
+2. To view your saved messages, click on the bot's icon, go to apps and select see saved messages.
+ <img src="./screenshots/seesaves.png" alt="Seeing Saved messages with the discord application."></img>
+
+3. If you want to use the summarizer command, run '/summarizer' in the thread or channel you want summarized.
+<img src="./screenshots/summarizer.gif" alt="Summarizing messages in a thread or channel."></img>
+
+4. To use the ask command so that you can ask a question based on the chat or outside of chat, run '/ask'.
+<img src="./screenshots/asknocontext.png" alt="Running the ask command in a thread or channel."></img>
+<img src="./screenshots/askcontext.png>" alt="Running the ask command in a thread or channel."></img>
+
+5. For bringing up wikipedia articles in the chat, run '/wikisearch'.
+<img src="./screenshots/wikisearch.png>" alt="Running the ask command in a thread or channel."></img>
+
+6. If you ever forget the usage of a commmand, run '/help' to get a description of all of the commands.
 
 ## Installation
 
@@ -139,27 +152,8 @@ To connect PyCharm to the Development Container, please [follow these instructio
 ## How to Run the Project
 
 
-
-### Using the Shell Script
-
-Navigate to the project root directory and execute the following command:
-
-```bash
-
-```
-
-### For Windows Users
-
-
-
-```bash
-
-```
-
 ### Accessing the App
-
-
-
+The app is accessed only through discord.
 
 > **Note:** .
 
@@ -169,8 +163,8 @@ This project was built by `Suave Supernovae` team as part of the Python Discord 
 
 | Avatar                                                     | Name                                        | Main contributions            |
 | ---------------------------------------------------------- | ------------------------------------------- | ----------------------------- |
-| <img src="https://github.com/Aekardy.png" width="50">   | [Aekardy](https://github.com/Aekardy) |  placeholder text   |
-| <img src="https://github.com/kian3158.png" width="50">     | [Adrian Carton De Wiart](https://github.com/kian3158)  | placeholder text |
-| <img src="https://github.com/theredditbandit.png" width="50"> | [TheLastMethBender](https://github.com/theredditbandit)     | placeholder text   |
-| <img src="https://github.com/NaviTheCoderBoi.png" width="50">     | [NaviTheCoderBoi](https://github.com/NaviTheCoderboi)      | placeholder text         |
-| <img src="https://github.com/Shubham-Mate.png" width="50">  | [Butter Dog](https://github.com/Shubham-Mate)   | placeholder text   |
+| <img src="https://github.com/Aekardy.png" width="50">   | [Aekardy](https://github.com/Aekardy) |  ask command,   |
+| <img src="https://github.com/kian3158.png" width="50">     | [Adrian Carton De Wiart](https://github.com/kian3158)  | search command, help command |
+| <img src="https://github.com/theredditbandit.png" width="50"> | [TheLastMethBender](https://github.com/theredditbandit)     | summarizer, repository setup   |
+| <img src="https://github.com/NaviTheCoderBoi.png" width="50">     | [NaviTheCoderBoi](https://github.com/NaviTheCoderboi)      | summarizer, base project setup         |
+| <img src="https://github.com/Shubham-Mate.png" width="50">  | [Butter Dog](https://github.com/Shubham-Mate)   | message saver,   |
