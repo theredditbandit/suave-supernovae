@@ -27,16 +27,6 @@ This README consists of the following sections:
 - [How to Run the Project](#how-to-run-the-project)
 - [Contributors](#contributors)
 
-In addition, each subfolder has another README detailing the architecture and design choices for each part of the app.
-
-| Folder                             | Description                                                                                                                     |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| [``](./)           | Placeholder text                                              |
-| [``](./) | Placeholder text                                        |
-| [``](./) | Placeholder text. |
-| [``](./)   | Placeholder text  
-
-
 ## Features
 
 Our project has the following key features:
@@ -77,7 +67,7 @@ With the application up and running, you can now explore the discord bot's capab
 4. To use the ask command so that you can ask a question based on the chat or outside of chat, run '/ask'.
 
 <img src="./screenshots/asknocontext.png" alt="Running the ask command in a thread or channel." width = "50%"></img>
-<img src="./screenshots/askcontext.png>" alt="Running the ask command in a thread or channel." width = "50%"></img>
+
 
 5. For bringing up wikipedia articles in the chat, run '/wikisearch'.
 
@@ -155,12 +145,11 @@ To connect PyCharm to the Development Container, please [follow these instructio
 
 
 ## How to Run the Project
+To run the project locally you'll need to get some tokens and api keys and add them to the .env.local file.
 
 
-### Accessing the App
-The app is accessed only through discord.
 
-> **Note:** .
+
 
 ## Contributors
 
@@ -168,7 +157,7 @@ This project was built by `Suave Supernovae` team as part of the Python Discord 
 
 | Avatar                                                     | Name                                        | Main contributions            |
 | ---------------------------------------------------------- | ------------------------------------------- | ----------------------------- |
-| <img src="https://github.com/Aekardy.png" width="50">   | [Aekardy](https://github.com/Aekardy) |  ask command,   |
+| <img src="https://github.com/Aekardy.png" width="50">   | [Aekardy](https://github.com/Aekardy) |  ask command, team lead   |
 | <img src="https://github.com/kian3158.png" width="50">     | [Adrian Carton De Wiart](https://github.com/kian3158)  | search command, help command |
 | <img src="https://github.com/theredditbandit.png" width="50"> | [TheLastMethBender](https://github.com/theredditbandit)     | summarizer, repository setup   |
 | <img src="https://github.com/NaviTheCoderBoi.png" width="50">     | [NaviTheCoderBoi](https://github.com/NaviTheCoderboi)      | summarizer, base project setup         |
