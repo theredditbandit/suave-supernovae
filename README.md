@@ -154,7 +154,9 @@ after these steps make sure to run the following command:
 ```
 python -m src.utils.db apply-all
 ```
+
 ## How to run the project
+
 
 >**Note: You may run migrations manually.**
 
@@ -163,6 +165,7 @@ python -m src.utils.db apply-all
 2. You will also need a groq token which you can get from [here](https://console.groq.com/keys).
 
 3. If you have installed the project locally you will also need to add a database dsn which can be done by running a postgres database and getting its connection string.
+
 You can also use [neon](https://neon.tech/) to get your dsn.
 
 Execute this in your postgressql terminal to create the migrations table:
